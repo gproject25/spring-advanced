@@ -1,7 +1,7 @@
 package org.example.expert.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.expert.config.PasswordEncoder;
+import org.example.expert.common.PasswordEncoder;
 import org.example.expert.domain.common.exception.InvalidRequestException;
 import org.example.expert.domain.user.dto.request.UserChangePasswordRequest;
 import org.example.expert.domain.user.dto.response.UserResponse;
@@ -19,18 +19,12 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserResponse getUser(long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new InvalidRequestException("User not found"));
-        return new UserResponse(user.getId(), user.getEmail());
+        User user = userRepository.findById(userId).orElseThrow(() -> new InvalidRequestException("사용자를 찾을 수 없습니다."));
+        return new UserResponse(user.getId(), user.getEmail(), user.getUserRole());
     }
 
     @Transactional
     public void changePassword(long userId, UserChangePasswordRequest userChangePasswordRequest) {
-        if (userChangePasswordRequest.getNewPassword().length() < 8 ||
-                !userChangePasswordRequest.getNewPassword().matches(".*\\d.*") ||
-                !userChangePasswordRequest.getNewPassword().matches(".*[A-Z].*")) {
-            throw new InvalidRequestException("새 비밀번호는 8자 이상이어야 하고, 숫자와 대문자를 포함해야 합니다.");
-        }
-
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new InvalidRequestException("User not found"));
 
