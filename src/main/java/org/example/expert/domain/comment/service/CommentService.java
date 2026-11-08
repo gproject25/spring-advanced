@@ -29,7 +29,7 @@ public class CommentService {
     public CommentSaveResponse saveComment(AuthUser authUser, long todoId, CommentSaveRequest commentSaveRequest) {
         User user = User.fromAuthUser(authUser);
         Todo todo = todoRepository.findById(todoId).orElseThrow(() ->
-                new InvalidRequestException("Todo not found"));
+                new InvalidRequestException("Todo를 찾을 수 없습니다."));
 
         Comment newComment = new Comment(
                 commentSaveRequest.getContents(),
