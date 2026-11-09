@@ -2,6 +2,14 @@ spring:
   application:
     name: expert
 
+  config:
+    import: aws-parameterstore:/expert/dev/
+
+  cloud:
+    aws:
+      parameterstore:
+        region: ap-southeast-2
+
   datasource:
     url: jdbc:mysql://localhost:3306/${DB_NAME}
     username: ${DB_USERNAME}
