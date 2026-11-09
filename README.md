@@ -3,7 +3,7 @@ Spring Boot 기반의 사용자 및 일정 관리 코드 개선 프로젝트!
 
 <br>
 
-#### 프로젝트 기록: [Velog] 
+#### 프로젝트 기록: [Velog](https://velog.io/@juhan913/posts)
 #### 문제 해결 과정: [Notion](https://bolder-shrimp-6f4.notion.site/Spring_-40fdf7a8441c803fb9c2e8ddd31b1266)
 #### 테스트용 Collection: [Postman Collection]
 
