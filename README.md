@@ -1,4 +1,4 @@
-# 📅 Expert
+# 📅 Expert Spring_코드 개선
 Spring Boot 기반의 사용자 및 일정 관리 코드 개선 프로젝트!
 
 <br>
@@ -33,4 +33,4 @@ Spring Boot 기반의 사용자 및 일정 관리 코드 개선 프로젝트!
 
 ### 📑 테스트 커버리지
 
-- 
+![img.png](images/TestCoverage.png)
