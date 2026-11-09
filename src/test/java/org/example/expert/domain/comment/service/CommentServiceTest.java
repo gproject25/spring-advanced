@@ -2,7 +2,9 @@ package org.example.expert.domain.comment.service;
 
 import org.example.expert.data.AuthUserFixture;
 import org.example.expert.data.TodoFixture;
+import org.example.expert.data.UserFixture;
 import org.example.expert.domain.comment.dto.request.CommentSaveRequest;
+import org.example.expert.domain.comment.dto.response.CommentResponse;
 import org.example.expert.domain.comment.dto.response.CommentSaveResponse;
 import org.example.expert.domain.comment.entity.Comment;
 import org.example.expert.domain.comment.repository.CommentRepository;
@@ -18,13 +20,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CommentServiceTest {
@@ -51,7 +57,7 @@ class CommentServiceTest {
         });
 
         // then
-        assertEquals("Todo not found", exception.getMessage());
+        assertEquals("Todo를 찾을 수 없습니다.", exception.getMessage());
     }
 
     @Test
@@ -74,4 +80,32 @@ class CommentServiceTest {
         // then
         assertNotNull(result);
     }
+
+	@Test
+	@DisplayName("댓글 목록 조회 성공")
+	void getComments_success() {
+
+		// given
+		long todoId = 1L;
+
+		User user1 = UserFixture.createUser();
+		User user2 = UserFixture.createUser2();
+
+		Comment comment1 = new Comment("첫 번째 댓글", user1, null);
+		Comment comment2 = new Comment("두 번째 댓글", user2, null);
+		ReflectionTestUtils.setField(comment1, "id", 1L);
+		ReflectionTestUtils.setField(comment2, "id", 2L);
+
+		List<Comment> comments = List.of(comment1, comment2);
+
+		when(commentRepository.findByTodoIdWithUser(todoId)).thenReturn(comments);
+
+		// when
+		List<CommentResponse> result = commentService.getComments(todoId);
+
+		// then
+		assertThat(result).hasSize(2);
+		assertThat(result.get(0).getContents()).isEqualTo("첫 번째 댓글");
+		assertThat(result.get(1).getContents()).isEqualTo("두 번째 댓글");
+	}
 }

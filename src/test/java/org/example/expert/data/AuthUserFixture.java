@@ -1,6 +1,7 @@
 package org.example.expert.data;
 
 import org.example.expert.domain.common.dto.AuthUser;
+import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.enums.UserRole;
 
 public class AuthUserFixture {
@@ -12,4 +13,7 @@ public class AuthUserFixture {
 		return new AuthUser(2L, "admin@test.com", UserRole.ADMIN);
 	}
 
+	public static AuthUser createAuthUserGivenUser(User user){
+		return new AuthUser(user.getId(), user.getEmail(), user.getUserRole());
+	}
 }

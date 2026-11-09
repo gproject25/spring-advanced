@@ -56,7 +56,7 @@ class ManagerServiceTest {
     }
 
     @Test
-	@DisplayName("Todo의 작성자가 null이면 담당자 지정 시 예외가 발생한다.")
+	@DisplayName("Todo의 작성자가 null이면 담당자 지정 시 예외가 발생")
     void todo의_user가_null인_경우_예외가_발생한다() {
         // given
         AuthUser authUser = AuthUserFixture.createAuthUser();
@@ -78,7 +78,7 @@ class ManagerServiceTest {
     }
 
     @Test // 테스트코드 샘플
-	@DisplayName("Todo ID로 담당자 목록을 조회하면 담당자 목록을 반환한다.")
+	@DisplayName("Todo ID로 담당자 목록을 조회하면 담당자 목록을 반환")
     public void manager_목록_조회에_성공한다() {
         // given
         User user = UserFixture.createUser();
@@ -101,7 +101,7 @@ class ManagerServiceTest {
     }
 
     @Test // 테스트코드 샘플
-	@DisplayName("Todo에 담당자 등록이 성공하면 ManagerSaveResponse를 반환한다.")
+	@DisplayName("Todo에 담당자 등록이 성공하면 ManagerSaveResponse를 반환")
     void todo가_정상적으로_등록된다() {
         // given
         AuthUser authUser = AuthUserFixture.createAuthUser();
