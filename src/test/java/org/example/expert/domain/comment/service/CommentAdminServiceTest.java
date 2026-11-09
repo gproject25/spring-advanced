@@ -1,0 +1,7 @@
+package org.example.expert.domain.comment.service;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class CommentAdminServiceTest {
+
+}
