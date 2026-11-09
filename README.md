@@ -1,4 +1,4 @@
-# Expert
+# 📅 Expert
 Spring Boot 기반의 사용자 및 일정 관리 코드 개선 프로젝트!
 
 <br>
@@ -9,7 +9,7 @@ Spring Boot 기반의 사용자 및 일정 관리 코드 개선 프로젝트!
 
 ---
 
-### Entities & 연관관계
+### 🗺️ Entities & 연관관계
 > `@ManyToOne`을 활용한 단방향 연관관계 매핑 ('>'로 표시)
 - todos > users
 - managers > todos, users
@@ -31,4 +31,6 @@ Spring Boot 기반의 사용자 및 일정 관리 코드 개선 프로젝트!
 
 ---
 
-### 테스트 커버리지
+### 📑 테스트 커버리지
+
+- 
