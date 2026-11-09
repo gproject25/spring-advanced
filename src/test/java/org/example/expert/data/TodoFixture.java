@@ -11,9 +11,20 @@ public class TodoFixture {
 		return todo;
 	}
 
+	public static Todo createTodo2(User user){
+		Todo todo = new Todo("title2", "contents2", "Rainy", user);
+		ReflectionTestUtils.setField(todo, "id", 2L);
+		return todo;
+	}
+
 	public static Todo createTodoWithoutUser() {
 		Todo todo = new Todo();
 		ReflectionTestUtils.setField(todo, "user", null);
+		return todo;
+	}
+
+	public static Todo createTodoWithtoutId(User user){
+		Todo todo = new Todo("title", "contents", "Sunny", user);
 		return todo;
 	}
 }
