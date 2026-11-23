@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.example.expert.common.LogResponse;
 import org.example.expert.domain.user.enums.UserRole;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -31,10 +32,7 @@ public class AdminCheckAOP {
 	private final ObjectMapper objectMapper;
 	private final LogResponse logResponse;
 
-	@Around("""
-        execution(* org.example.expert.domain.comment.controller.CommentAdminController.deleteComment(..))
-        || execution(* org.example.expert.domain.user.controller.UserAdminController.changeUserRole(..))
-        """)
+	@Around("@annotation(org.example.expert.common.annotation.AdminApiLog)")
 	public Object logAdminApi(ProceedingJoinPoint joinPoint) throws Throwable {
 
 		//실행 전
@@ -53,7 +51,12 @@ public class AdminCheckAOP {
 		Object result = joinPoint.proceed();
 
 		//실행 후
-		String responseJson = objectMapper.writeValueAsString(result);
+		Object responseBody = result;
+		if (result instanceof ResponseEntity<?> responseEntity) {
+			responseBody = responseEntity.getBody();
+		}
+
+		String responseJson = objectMapper.writeValueAsString(responseBody);
 		logResponse.adminApiResponse(userId, userRole, url, responseJson);
 
 		return result;

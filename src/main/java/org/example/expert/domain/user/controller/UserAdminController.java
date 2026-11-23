@@ -1,6 +1,8 @@
 package org.example.expert.domain.user.controller;
 
 import lombok.RequiredArgsConstructor;
+
+import org.example.expert.common.annotation.AdminApiLog;
 import org.example.expert.domain.user.dto.request.UserRoleChangeRequest;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.service.UserAdminService;
@@ -16,6 +18,7 @@ public class UserAdminController {
 
     private final UserAdminService userAdminService;
 
+	@AdminApiLog
     @PatchMapping("/admin/users/{userId}")
     public ResponseEntity<UserResponse> changeUserRole(@PathVariable long userId, @RequestBody UserRoleChangeRequest userRoleChangeRequest) {
 		return ResponseEntity.ok(userAdminService.changeUserRole(userId, userRoleChangeRequest));
